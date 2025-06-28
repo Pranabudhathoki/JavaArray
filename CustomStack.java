@@ -10,34 +10,46 @@ public class CustomStack {
     }
 
     public void push(int val) {
-        if (top == capacity - 1) {
+        if (isFull()) {
             throw new RuntimeException("Stack Overflow");
         }
         stack[++top] = val;
     }
 
     public int pop() {
-        if (top == -1) {
+        if (isEmpty()) {
             throw new RuntimeException("Stack Underflow");
         }
         return stack[top--];
     }
 
     public int peek() {
-        if (top == -1) {
+        if (isEmpty()) {
             throw new RuntimeException("Stack is Empty");
         }
         return stack[top];
     }
 
-    public static void main(String[] args) {
-        CustomStack stack = new CustomStack(5);
-        stack.push(5);
-        stack.push(10);
-        stack.push(15);
+    public boolean isEmpty() {
+        return top == -1;
+    }
 
-        System.out.println("Top element: " + stack.peek()); // 15
-        System.out.println("Popped: " + stack.pop());       // 15
-        System.out.println("Top element after pop: " + stack.peek()); // 10
+    public boolean isFull() {
+        return top == capacity - 1;
+    }
+
+    public static void main(String[] args) {
+        CustomStack stack = new CustomStack(3);
+        
+        System.out.println("Is Empty: " + stack.isEmpty()); 
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+        
+        System.out.println("Is Full: " + stack.isFull());   
+        System.out.println("Top Element: " + stack.peek()); 
+        System.out.println("Popped: " + stack.pop());       
+        System.out.println("Top Element: " + stack.peek()); 
+        System.out.println("Is Full: " + stack.isFull());   
     }
 }
